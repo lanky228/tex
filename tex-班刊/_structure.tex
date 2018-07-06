@@ -1,0 +1,32 @@
+\chapter{Introduction}
+    \section{Qui je suis}
+    \lipsum[1-3]
+    
+    \section{Ce document}
+    \lipsum[1-4]
+    
+\begin{titlepage}
+    \begin{tikzpicture}[remember picture, overlay]
+
+    \node [yshift=-180, inner sep=0, outer sep=0]
+        at (current page.north)
+        {\includegraphics[width=\paperwidth]{head.png}};
+
+    \node [shape=rectangle,
+            fill=myblue,
+            anchor=west,
+            minimum width=1.4\paperwidth,
+            xshift=-0.7\paperwidth,
+            inner sep=2cm,
+            rotate=10]
+        at (current page.center)
+        {\Huge\textcolor{white}{\textbf{完}}};
+
+    \node [yshift=120, text width=\paperwidth, align=center]
+        at (current page.south)
+        {
+            \color{myblue}
+                \theauthor\\\thedate
+        };
+    \end{tikzpicture}
+\end{titlepage}

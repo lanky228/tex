@@ -1,0 +1,109 @@
+\usepackage{tikz}
+\usepackage{titlesec}
+\usepackage{tikzpagenodes}
+\usepackage{color}
+\usepackage{fancyhdr}
+\usepackage{titling}
+
+\usetikzlibrary{calc}
+\pagestyle{fancyplain}
+\fancyhf{}
+
+\definecolor{white}{RGB}{1,1,1}
+\definecolor{myblue}{RGB}{126,136,150}
+
+%标题
+\renewcommand{\maketitle}{
+    \begin{titlepage}
+    \begin{tikzpicture}[remember picture, overlay]
+
+    \node [yshift=-180, inner sep=0, outer sep=0]
+        at (current page.north)
+        {\includegraphics[width=\paperwidth]{head.png}};
+
+    \node [shape=rectangle,
+            fill=myblue,
+            anchor=west,
+            minimum width=1.4\paperwidth,
+            xshift=-0.7\paperwidth,
+            inner sep=2cm,
+            rotate=10]
+        at (current page.center)
+        {\Huge\textcolor{white}{\textbf{\thetitle}}};
+
+    \node [yshift=120, text width=\paperwidth, align=center]
+        at (current page.south)
+        {
+            \color{myblue}
+                \theauthor\\\thedate
+        };
+    \end{tikzpicture}
+    \end{titlepage}
+    %空白页
+    \clearpage
+    \phantom{s}
+    \thispagestyle{empty}
+}
+
+%头部 标题
+\chead{
+    \begin{tikzpicture}[remember picture, overlay]
+        \node [yshift=-100, inner sep=0, outer sep=0] at (current page.north) {
+            \includegraphics[width=\paperwidth]{head.png}
+        };
+        \node[yshift=-40,rotate=5, text width=0.5\paperwidth] at (current page.north) {
+            \ifnum\value{page}>2
+                \Huge
+                \textbf{``}
+                \textcolor{myblue}{\leftmark}
+                \textbf{''}
+            \fi
+        };
+    \end{tikzpicture}
+}
+
+%标题
+\titleformat{\chapter} 
+    {\Huge\color{white}}
+    {\thechapter} 
+    {0pt}
+    {
+        \begin{tikzpicture}[remember picture,overlay]
+        \draw[fill=myblue] (current page.north west)
+        -- (current page.north east)
+        -- ++ (0, -8)
+        -- ++ (-\paperwidth, -2)
+        -- cycle;
+        \end{tikzpicture}
+    }
+
+%页眉页脚 偶数
+\fancyfoot[CE]{
+    \begin{tikzpicture}[remember picture, overlay]
+        \draw [fill=myblue]
+            (current page.south east)
+            -- (current page.south west)
+            -- ++ (0, 4)
+            -- cycle;
+        \node [yshift=28pt,xshift=50pt]
+            at (current page.south west)
+            {\color{white}\rightmark};
+        \node [yshift=28pt]
+            at (current page.south)
+            {\color{white}\thepage};
+    \end{tikzpicture}
+}
+
+%页眉页脚 奇数
+\fancyfoot[CO]{
+    \begin{tikzpicture}[remember picture, overlay]
+        \draw [fill=myblue]
+            (current page.south west)
+            -- (current page.south east)
+            -- ++ (0, 2)
+            -- cycle;
+        \node [yshift=28pt, xshift=-50pt]
+            at (current page.south east)
+            {\color{white}\thepage};
+    \end{tikzpicture}
+}
